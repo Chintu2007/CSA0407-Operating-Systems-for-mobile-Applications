@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+struct File {
+    char name[20];
+    int start, length;
+};
+
+int main() {
+    int n, i, j, disk[50] = {0};
+    struct File files[10];
+
+    printf("Enter number of files: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("\nEnter file name: ");
+        scanf("%s", files[i].name);
+        printf("Enter start block: ");
+        scanf("%d", &files[i].start);
+        printf("Enter length of file: ");
+        scanf("%d", &files[i].length);
+
+        int flag = 1;
+        for (j = files[i].start; j < files[i].start + files[i].length; j++) {
+            if (disk[j] == 1) {
+                flag = 0;
+                break;
+            }
+        }
+
+        if (flag == 1) {
+            for (j = files[i].start; j < files[i].start + files[i].length; j++)
+                disk[j] = 1;
+            printf("File %s allocated successfully.\n", files[i].name);
+        } else {
+            printf("File %s cannot be allocated (space not free).\n", files[i].name);
+            i--; // repeat this file input
+        }
+    }
+
+    printf("\nFile\tStart\tLength\n");
+    for (i = 0; i < n; i++) {
+        printf("%s\t%d\t%d\n", files[i].name, files[i].start, files[i].length);
+    }
+
+    return 0;
+}
