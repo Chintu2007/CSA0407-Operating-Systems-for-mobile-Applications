@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>      
+#include <sys/stat.h>  
+#include <string.h>      
+#include <errno.h>
+
+void list_directory(const char *path) {
+    DIR *dir;
+    struct dirent *entry;
+    struct stat fileStat;
+    char fullPath[1024];
+
+    dir = opendir(path);
+    if (dir == NULL) {
+        perror("opendir");
+        return;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        // Skip hidden files like "." and ".."
+        if (entry->d_name[0] == '.')
+            continue;
+
+        snprintf(fullPath, sizeof(fullPath), "%s/%s", path, entry->d_name);
+        if (stat(fullPath, &fileStat) == -1) {
+            perror("stat");
+            continue;
+        }
+
+        // Print file type
+        if (S_ISDIR(fileStat.st_mode)) {
+            printf("[DIR]  ");
+        } else if (S_ISREG(fileStat.st_mode)) {
+            printf("[FILE] ");
+        } else {
+            printf("[OTHER]");
+        }
+
+        printf(" %s\n", entry->d_name);
