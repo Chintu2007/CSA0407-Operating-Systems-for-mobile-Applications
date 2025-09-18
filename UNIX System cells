@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>        
+#include <unistd.h>      
+#include <sys/stat.h>     
+#include <dirent.h>       
+#include <string.h>       
+#include <errno.h>
+
+int main() {
+    int fd;
+    char *filename = "sample.txt";
+    char buffer[100];
+    struct stat fileStat;
+
+    // 1. Create a file and write to it
+    fd = open(filename, O_CREAT | O_WRONLY, 0644);
+    if (fd < 0) {
+        perror("open");
+        return 1;
+    }
+
+    write(fd, "UNIX System Call Example\n", strlen("UNIX System Call Example\n"));
+
+    // 2. Use lseek to move the file offset
+    off_t_
