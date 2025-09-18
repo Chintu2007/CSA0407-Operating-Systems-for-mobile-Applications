@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_USERS 10
+#define MAX_FILES 10
+#define MAX_NAME_LEN 30
+
+// Structure to hold files
+struct File {
+    char name[MAX_NAME_LEN];
+};
+
+// Structure for user directory
+struct User {
+    char username[MAX_NAME_LEN];
+    struct File files
