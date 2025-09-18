@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+#define MAX_BLOCKS 10
+#define MAX_PROCESSES 10
+
+int main() {
+    int blockSize[MAX_BLOCKS], processSize[MAX_PROCESSES];
+    int blockCount, processCount;
+    int allocation[MAX_PROCESSES];
+    int i, j;
+
+    // Input memory block sizes
+    printf("Enter number of memory blocks: ");
+    scanf("%d", &blockCount);
+    printf("Enter size of each memory block:\n");
+    for (i = 0; i < blockCount; i++) {
+        printf("Block %d: ", i + 1);
+        scanf("%d", &blockSize[i]);
+    }
+
+    // Input process sizes
+    printf("Enter number of processes: ");
+    scanf("%d", &processCount);
+    printf("Enter size of each process:\n");
