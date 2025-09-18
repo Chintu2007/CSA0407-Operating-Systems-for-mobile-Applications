@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>      
+#include <unistd.h>     
+#include <string.h>     
+#include <errno.h>      
+
+int main() {
+    int fd;
+    ssize_t bytes_written, bytes_read;
+    char *filename = "demo_file.txt";
+    char *data = "Hello, this is a file created using UNIX system calls!\n";
+    char buffer[100];
+
+    // 1. Create and open a file (with write permissions)
+    fd = open(filename, O_CREAT | O_WRONLY, 0644);
+    if (fd < 0) {
