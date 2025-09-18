@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE 1024
+
+int main(int argc, char *argv[]) {
+    FILE *fp;
+    char line[MAX_LINE];
+
+    // Check for correct usage
+    if (argc != 3) {
+        fprintf(stderr, "Usage: %s <pattern> <filename>\n", argv[0]);
+        return 1;
+    }
+
+    char *pattern = argv[1];
+    char *filename = argv[2];
+
+    // Open the file
+    fp = fopen(filename, "r");
