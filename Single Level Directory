@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_FILES 100
+#define MAX_FILENAME 30
+
+// Structure to hold file info
+struct File {
+    char name[MAX_FILENAME];
+};
+
+int main() {
+    struct File directory[MAX_FILES];
+    int fileCount = 0;
+    int choice;
+    char filename[MAX_FILENAME];
+    int found;
+
+    while (1) {
+        printf("\n---- Single Level Directory Simulation ----\n");
+        printf("1. Create File\n");
+        printf("2. Delete File\n");
+        printf("3. Search File\n");
